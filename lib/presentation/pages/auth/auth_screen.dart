@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/controllers/auth_controllers.dart';
 import '../../../data/controllers/employee_controller.dart';
+import '../responsive.dart';
 
 class AuthScreen extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
@@ -29,8 +30,12 @@ class AuthScreen extends StatelessWidget {
                   )),
               const SizedBox(height: 20),
               SizedBox(
-                width: screenWidth / 2,
-                height: screenHeight / 2,
+                width: Responsive.isDesktop(context)
+                    ? screenWidth / 2
+                    : screenWidth * .7,
+                height: Responsive.isDesktop(context)
+                    ? screenHeight / 2
+                    : screenHeight * .7,
                 child: Card(
                   elevation: 2,
                   child: Padding(
@@ -85,14 +90,22 @@ class AuthScreen extends StatelessWidget {
                                 ),
                                 Align(
                                   alignment: Alignment.bottomRight,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      authController.toggleSignUpMode();
-                                    },
-                                    child: Obx(() => Text(authController
-                                            .isSignUpMode.value
-                                        ? 'Already have an account? Login'
-                                        : 'Don\'t have an account? Sign Up')),
+                                  child: Flexible(
+                                    child: TextButton(
+                                      onPressed: () {
+                                        authController.toggleSignUpMode();
+                                      },
+                                      child: Obx(() => Text(
+                                            authController.isSignUpMode.value
+                                                ? 'Already have an account? Login'
+                                                : 'Don\'t have an account? Sign Up',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Responsive.isMobile(context)
+                                                        ? 10
+                                                        : 14),
+                                          )),
+                                    ),
                                   ),
                                 ),
                               ],

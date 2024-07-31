@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/controllers/employee_controller.dart';
 import '../../../data/models/employee.dart';
+import '../responsive.dart';
 
 class EmployeeFormPage extends StatefulWidget {
   final Employee? employee;
@@ -47,8 +48,12 @@ class _EmployeeFormPageState extends State<EmployeeFormPage> {
       ),
       body: Center(
         child: SizedBox(
-          width: screenWidth / 2,
-          height: screenHeight / 2,
+          width: Responsive.isDesktop(context)
+              ? screenWidth / 2
+              : screenWidth * .7,
+          height: Responsive.isDesktop(context)
+              ? screenHeight / 2
+              : screenHeight * .7,
           child: Card(
             elevation: 2,
             child: Padding(
