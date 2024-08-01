@@ -22,17 +22,31 @@ class AuthController extends GetxController {
 
   void signUp(String email, String password) async {
     isLoading.value = true;
-    User? user = await authService.signUp(email, password);
-    isLoading.value = false;
-    if (user != null) {
-      _storage.write('email', email);
-      _storage.write('password', password);
-      isAuthenticated.value = true;
-      toggleSignUpMode();
-      Get.offAll(() => AuthScreen());
-       Get.snackbar('Success', 'Sign Up Successfully');
-    } else {
-      Get.snackbar('Error', 'Sign Up Failed');
+
+    try {
+      User? user = await authService.signUp(email, password);
+      isLoading.value = false;
+
+      if (user != null) {
+        Get.snackbar(
+          'Success',
+          'Sign Up Successful',
+        );
+
+        toggleSignUpMode();
+      } else {
+        Get.snackbar(
+          'Error',
+          'Sign Up Failed',
+        );
+      }
+    } catch (e) {
+      isLoading.value = false;
+
+      Get.snackbar(
+        'Error',
+        'Sign Up Failed: $e',
+      );
     }
   }
 
@@ -45,7 +59,7 @@ class AuthController extends GetxController {
       _storage.write('password', password);
       isAuthenticated.value = true;
       Get.offAll(() => HomePage());
-       Get.snackbar('Success', 'Login Successfully');
+      Get.snackbar('Success', 'Login Successfully');
     } else {
       Get.snackbar('Error', 'Login Failed');
     }
