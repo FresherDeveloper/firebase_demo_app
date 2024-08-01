@@ -42,16 +42,18 @@ class HomePage extends GetView<EmployeeController> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Responsive(
-            mobile: _buildEmployeeList(),
-            tablet: _buildEmployeeList(),
-            desktop: _buildEmployeeList(columnSpacing: 250),
-            //  Row(
-            //   children: [
-            //     Expanded(flex: 1, child: _buildEmployeeList()),
-            //     Expanded(flex: 2, child: Placeholder()), // Placeholder for details
-            //   ],
-            //),
+          child: Center(
+            child: Responsive(
+              mobile: _buildEmployeeList(),
+              tablet: _buildEmployeeList(),
+              desktop: _buildEmployeeList(columnSpacing: 250),
+              //  Row(
+              //   children: [
+              //     Expanded(flex: 1, child: _buildEmployeeList()),
+              //     Expanded(flex: 2, child: Placeholder()), // Placeholder for details
+              //   ],
+              //),
+            ),
           ),
         ),
       ),

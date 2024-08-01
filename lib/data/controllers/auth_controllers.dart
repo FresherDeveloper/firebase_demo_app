@@ -28,7 +28,9 @@ class AuthController extends GetxController {
       _storage.write('email', email);
       _storage.write('password', password);
       isAuthenticated.value = true;
-      Get.offAll(() => HomePage());
+      toggleSignUpMode();
+      Get.offAll(() => AuthScreen());
+       Get.snackbar('Success', 'Sign Up Successfully');
     } else {
       Get.snackbar('Error', 'Sign Up Failed');
     }
@@ -43,6 +45,7 @@ class AuthController extends GetxController {
       _storage.write('password', password);
       isAuthenticated.value = true;
       Get.offAll(() => HomePage());
+       Get.snackbar('Success', 'Sign Up Successfully');
     } else {
       Get.snackbar('Error', 'Login Failed');
     }
