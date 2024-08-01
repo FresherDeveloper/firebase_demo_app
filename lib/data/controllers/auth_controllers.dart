@@ -45,7 +45,7 @@ class AuthController extends GetxController {
       _storage.write('password', password);
       isAuthenticated.value = true;
       Get.offAll(() => HomePage());
-       Get.snackbar('Success', 'Sign Up Successfully');
+       Get.snackbar('Success', 'Login Successfully');
     } else {
       Get.snackbar('Error', 'Login Failed');
     }
